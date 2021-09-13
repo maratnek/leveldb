@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+message Block {
+    string id = 1;
+    int32 hash = 2;
+    int32 parent_hash = 3;
+}

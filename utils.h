@@ -1,9 +1,9 @@
 //
-// Created by maratworker on 09.09.2021.
+// Created by marat on 09.09.2021.
 //
 
-#ifndef ROCKSDB_UTILS_H
-#define ROCKSDB_UTILS_H
+#ifndef UTILS_H
+#define UTILS_H
 #pragma once
 
 #include <chrono>
@@ -28,4 +28,4 @@ std::string gen_random_str(const int len);
 
 uint64_t gen_num();
 
-#endif //ROCKSDB_UTILS_H
+#endif //UTILS_H

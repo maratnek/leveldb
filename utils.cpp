@@ -13,8 +13,6 @@ static std::mt19937 gen(rd());  // to seed mersenne twister.
 /// random for tests
 std::string gen_random_str(const int len)
 {
-//    random_device rd;   // non-deterministic generator
-//    mt19937 gen(rd());  // to seed mersenne twister.
     std::string tmp_s;
     static const char alphanum[] =
             "0123456789"
