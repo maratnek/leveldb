@@ -27,7 +27,6 @@ add_executable(multi-load-leveldb multi-load-leveldb.cpp utils.cpp)
 target_link_libraries(multi-load-leveldb CONAN_PKG::leveldb)
 
 find_package(Protobuf REQUIRED)
-#protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS first.proto)
 set(PROTO_FILES
        proto/first.proto
        proto/block.proto
@@ -35,7 +34,7 @@ set(PROTO_FILES
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_FILES})
 message(test ${PROTO_SRCS} and ${PROTO_HDRS})
 add_executable(proto-real-data proto-real-data.cpp utils.cpp ${PROTO_SRCS} ${PROTO_HRCS})
-#target_include_directories(proto-real-data PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/proto)
+target_include_directories(proto-real-data PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(proto-real-data CONAN_PKG::leveldb CONAN_PKG::protobuf)
 
 include(CTest)
