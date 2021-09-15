@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package chain;
+
 message Block {
     string id = 1;
     int32 hash = 2;

@@ -8,6 +8,7 @@
 //#include "first.pb.h"
 #include "block.pb.h"
 #include "protocols/routed.h"
+using namespace chain;
 
 int main()
 {
@@ -15,6 +16,16 @@ int main()
     Block block1{};
     std::cout << "Is initialized: " << block1.IsInitialized() << std::endl;
     std::cout << "Debug string: " << block1.DebugString() << std::endl;
+
+    block1.set_id("block1");
+    block1.set_hash(11);
+    block1.set_parent_hash(22);
+    auto ser_block = block1.SerializeAsString();
+    Block block2{};
+    block2.ParseFromString(ser_block);
+
+    std::cout << "Debug string block2: " << block2.DebugString() << std::endl;
+    std::cout << "Block 2 Id: " << block2.id() << " hash: " << block2.hash() << " p hash: " << block2.parent_hash() << std::endl;
 
 
     Block block{};

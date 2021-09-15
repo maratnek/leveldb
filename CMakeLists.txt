@@ -33,14 +33,15 @@ set(PROTO_FILES
        proto/first.proto
        proto/block.proto
        )
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_FILES})
-add_executable(proto-real-data proto-real-data.cpp utils.cpp ${PROTO_SRCS} ${PROTO_HRCS})
-target_include_directories(proto-real-data PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/proto)
+add_executable(proto-real-data proto-real-data.cpp utils.cpp ${PROTO_SRCS})
+target_include_directories(proto-real-data PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(proto-real-data CONAN_PKG::leveldb CONAN_PKG::protobuf)
 
 #proto-with-leveldb
-add_executable(proto-with-leveldb proto-with-leveldb.cpp utils.cpp ${PROTO_SRCS} ${PROTO_HRCS})
-target_include_directories(proto-with-leveldb PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/proto)
+add_executable(proto-with-leveldb proto-with-leveldb.cpp utils.cpp ${PROTO_SRCS})
+target_include_directories(proto-with-leveldb PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(proto-with-leveldb CONAN_PKG::leveldb CONAN_PKG::protobuf)
 
 include(CTest)
