@@ -21,7 +21,8 @@
 using namespace leveldb;
 
 std::atomic<uint32_t> atom_count = 0;
-std::mutex mutex_gener_add_block;
+//std::mutex mutex_gener_add_block;
+std::recursive_mutex mutex_gener_add_block;
 
 static std::hash<std::string> str_hash;
 
@@ -33,6 +34,10 @@ struct TBlock {
     THash _parent_hash;
 
     bool operator==(const TBlock& t_block) const {
+        {
+            std::lock_guard<std::recursive_mutex> lockGuard(mutex_gener_add_block);
+            std::cout <<  t_block._id << " == " << _id << " | " << t_block._hash << " == " <<  _hash << " | " << t_block._parent_hash << " == " << _parent_hash;
+        }
         return t_block._id == _id && t_block._hash == _hash && t_block._parent_hash && _parent_hash;
     }
 
@@ -170,7 +175,7 @@ int main(int ac, char** av) {
             //     get value
             s = db->Get(ReadOptions(), v_r_str[i].getStrHash(), &value);
             {
-                std::lock_guard<std::mutex> lock(mutex_gener_add_block);
+                std::lock_guard<std::recursive_mutex> lock(mutex_gener_add_block);
                 std::cout << "Compare: " << std::endl;
                 block.deserialize(value);
                 v_r_str[i].show();
